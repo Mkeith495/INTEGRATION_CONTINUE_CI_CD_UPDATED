@@ -1,16 +1,16 @@
-**User story :** 
+**User story :**
 
 Créer un produit
 
-**Règles métier :** 
+**Règles métier :**
 
 le titre ne contient pas d'espace
 
-**Scénarios :** 
+**Scénarios :**
 
-- Création réussie : 
+- Création réussie :
 
-Quand je créé un produit avec : 
+Quand je créé un produit avec :
 
 - titre : "test"
 - prix : 200

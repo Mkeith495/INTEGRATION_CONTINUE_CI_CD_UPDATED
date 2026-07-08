@@ -102,7 +102,6 @@ describe('US-1 : Créer un produit', () => {
         ).rejects.toThrow('erreur lors de la création du produit');
     });
 
-
     test('Scénario 5 : création échouée, titre trop long', async () => {
         //Étant donné qu'il n'y a pas de produit enregistré
         const createProductRepository = new CreateProductDummyRepository();

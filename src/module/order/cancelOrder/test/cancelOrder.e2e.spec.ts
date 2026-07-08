@@ -2,7 +2,7 @@ import { describe, test, afterEach } from '@jest/globals';
 import {
     CancelPendingOrderE2eDriver,
     CancelShippedOrderRejectedE2eDriver,
-    CancelNonExistingOrderE2eDriver,
+    CancelNonExistingOrderE2eDriver
 } from './cancelOrder.e2eDriver';
 
 describe('Annuler une commande — E2E', () => {
