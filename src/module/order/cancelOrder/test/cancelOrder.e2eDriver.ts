@@ -8,7 +8,7 @@ import { buildApp } from '../../../../config/app';
 import type {
     CancelPendingOrderDSL,
     CancelShippedOrderRejectedDSL,
-    CancelNonExistingOrderDSL,
+    CancelNonExistingOrderDSL
 } from './cancelOrder.dsl';
 
 // Infra partagée : démarrage d'un container PG + init DataSource + wire buildApp.
@@ -18,9 +18,7 @@ async function bootInfrastructure(): Promise<{
     dataSource: DataSource;
     app: Express;
 }> {
-    const container = await new PostgreSqlContainer('postgres:16')
-        .withExposedPorts(5432)
-        .start();
+    const container = await new PostgreSqlContainer('postgres:16').withExposedPorts(5432).start();
 
     const dataSource = new DataSource({
         type: 'postgres',
@@ -32,7 +30,7 @@ async function bootInfrastructure(): Promise<{
         logging: false,
         entities: [Order],
         synchronize: true,
-        entitySkipConstructor: true,
+        entitySkipConstructor: true
     });
 
     await dataSource.initialize();
@@ -46,7 +44,7 @@ async function bootInfrastructure(): Promise<{
 
 async function teardownInfrastructure(
     container: StartedPostgreSqlContainer | undefined,
-    dataSource: DataSource | undefined,
+    dataSource: DataSource | undefined
 ): Promise<void> {
     if (dataSource?.isInitialized) {
         await dataSource.destroy();
@@ -79,7 +77,7 @@ export class CancelPendingOrderE2eDriver implements CancelPendingOrderDSL {
             productIds: [1, 2],
             totalPrice: 100,
             createdAt: new Date(),
-            status: status as OrderStatus,
+            status: status as OrderStatus
         } as Order);
         this.orderId = saved.id;
     }
@@ -125,14 +123,14 @@ export class CancelShippedOrderRejectedE2eDriver implements CancelShippedOrderRe
     }
 
     async givenAnOrderExistsWithStatus(
-        status: 'SHIPPED' | 'DELIVERED' | 'CANCELLED',
+        status: 'SHIPPED' | 'DELIVERED' | 'CANCELLED'
     ): Promise<void> {
         const repo = this.dataSource.getRepository(Order);
         const saved = await repo.save({
             productIds: [1],
             totalPrice: 50,
             createdAt: new Date(),
-            status: status as OrderStatus,
+            status: status as OrderStatus
         } as Order);
         this.orderId = saved.id;
     }
@@ -149,7 +147,7 @@ export class CancelShippedOrderRejectedE2eDriver implements CancelShippedOrderRe
     }
 
     async thenOrderStatusIsUnchanged(
-        expectedStatus: 'SHIPPED' | 'DELIVERED' | 'CANCELLED',
+        expectedStatus: 'SHIPPED' | 'DELIVERED' | 'CANCELLED'
     ): Promise<void> {
         const repo = this.dataSource.getRepository(Order);
         const reloaded = await repo.findOneBy({ id: this.orderId });

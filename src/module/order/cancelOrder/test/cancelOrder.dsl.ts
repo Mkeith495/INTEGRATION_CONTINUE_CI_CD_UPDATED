@@ -10,7 +10,9 @@ export interface CancelShippedOrderRejectedDSL {
     givenAnOrderExistsWithStatus(status: 'SHIPPED' | 'DELIVERED' | 'CANCELLED'): Promise<void>;
     whenICancelTheOrder(): Promise<void>;
     thenOrderCannotBeCancelled(): Promise<void>;
-    thenOrderStatusIsUnchanged(expectedStatus: 'SHIPPED' | 'DELIVERED' | 'CANCELLED'): Promise<void>;
+    thenOrderStatusIsUnchanged(
+        expectedStatus: 'SHIPPED' | 'DELIVERED' | 'CANCELLED'
+    ): Promise<void>;
 }
 
 export interface CancelNonExistingOrderDSL {

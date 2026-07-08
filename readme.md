@@ -7,10 +7,7 @@
 - démarrer le serveur : "npm run dev" à la racine du projet
 - installer Postman et tester l'url localhost:3000/api/health pour vérifier que l'API fonctionne
 
-
-
-
-TP : 
+TP :
 
 - Installez husky : npm install --save-dev husky
 - Initialisez le : npx husky init
@@ -20,58 +17,50 @@ TP :
 - Modifiez le fichier src/module/product/createProduct/test/createProductUseCase.spec.ts, ligne 78 : remplacez : " 11000" par "500" : le but est de faire exprès de casser le test
 - faites un commit et vérifiez que ça ne fonctionne plus
 
+TP :
 
-TP : 
-
-- Supprimez en ligne de commande le dossier .git : "rm -rf .git"  à la racine de votre projet, pour supprimer l'install git
+- Supprimez en ligne de commande le dossier .git : "rm -rf .git" à la racine de votre projet, pour supprimer l'install git
 - Re-initialisez git avec : "git init", puis "git add.", puis "git commit -m "exemple de message"
-- Créez un repository sur github et liez votre projet à ce repository  (git remote add ....)
+- Créez un repository sur github et liez votre projet à ce repository (git remote add ....)
 - Pushez votre projet : git push origin ...
 - Créez .github/workflows/ci.yml avec le contenu suivant :
 
 name: CI
 
 on:
-  push:
-    branches: [main]
-
+push:
+branches: [main]
 
 jobs:
-  unit-tests:
-    runs-on: ubuntu-latest
-    steps:
-      
+unit-tests:
+runs-on: ubuntu-latest
+steps:
+
 uses: actions/checkout@v4
 
-      
 uses: actions/setup-node@v4
-      with:
-        node-version: 25
-        cache: npm
-        cache-dependency-path: package-lock.json
+with:
+node-version: 25
+cache: npm
+cache-dependency-path: package-lock.json
 
-      
 run: npm ci
 
-      
 run: npm run test:unit
 
 - Refaites un push de votre branche main
 - Allez sur le repo github, onglet "actions" et vous devriez voir le workfow executé
 
-
-
 name: CI
 
 on:
-  push:
-    branches: [m1-epsi]
+push:
+branches: [m1-epsi]
 
 jobs:
-  unit-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+unit-tests:
+runs-on: ubuntu-latest
+steps: - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
@@ -82,7 +71,6 @@ jobs:
       - run: npm ci
 
       - run: npm run test:unit
-
 
 TP : dans le fichier ci.yml, entre la ligne npm ci et npm run test:unit, ajoutez :
 
